@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>- MCricket -</title>
+    <link rel="icon" href="./cckt.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Oswald:wght@600&display=swap" rel="stylesheet">
+    <style>
+      * {
+        text-transform: uppercase;
+        font-family: "Orbitron";
+        letter-spacing: 1.5px;
+        user-select: none;
+      }
+      #header {
+        background-color: #b539ee2c;
+        border-radius: 15px;
+        color: rgb(40, 233, 223);
+        text-shadow: 8px 8px 12px rgb(255, 61, 229);
+        font-weight: normal;
+        padding: 10px;
+        margin: 0px 15px;
+      }
+      #ans {
+        letter-spacing: 2px;
+        text-shadow: 4px 4px 8px rgb(221, 120, 26);
+      }
+      body {
+        background-image: url(./ground.jpg);
+        background-repeat: repeat-x;
+        background-size: cover;
+        text-align: center;
+      }
+      .main button {
+        font-size: 1.3em;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.349);
+        border-radius: 15px;
+        padding: 10px 30px;
+        margin: 30px 20px;
+        color: white;
+        box-shadow: 2px 2px 80px rgb(255, 255, 255);
+        text-transform: uppercase;
+      }
+      .main button:hover {
+        background-color: rgba(255, 255, 255, 0.349);
+        color: rgb(0, 0, 0);
+        text-shadow: 4px 4px 8px rgb(255, 255, 255);
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      table {
+        text-shadow: 8px 8px 10px rgb(0, 0, 0);
+        border: solid 2px yellow;
+        margin: 20px auto;
+        color: rgb(234, 238, 28);
+        font-weight: bolder;
+        background-color: #ffffff67;
+        padding: 30px;
+        box-shadow: 2px 2px 80px rgb(245, 248, 82);
+      }
+
+      #lost {
+        color: rgb(255, 20, 20);
+        font-weight: 800;
+        text-shadow: 5px 5px 12px rgb(255, 20, 20);
+        border-radius: 50%;
+      }
+      #win {
+        color: rgb(35, 241, 35);
+        text-shadow: 5px 5px 12px rgb(35, 241, 35);
+        font-weight: 800;
+      }
+      #tie {
+        color: rgb(255, 255, 255);
+        font-weight: 600;
+        text-shadow: 5px 5px 12px rgb(255, 255, 255);
+        border-radius: 50%;
+      }
+      #sc {
+        font-family: 'Oswald';
+        text-shadow: none;
+        font-weight: 900;
+        text-decoration: underline rgb(137, 241, 255);
+        font-size: 30px;
+        background: linear-gradient(to right, #fff01e, 
+                    #ffdf89, #ff9e2e, #ffe600); 
+            -webkit-text-fill-color: transparent; 
+            -webkit-background-clip: text; 
+      }
+      .main {
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        padding: 30px 0px;
+        width: 100%;
+        margin-top: 50px;
+        box-shadow: 10px 10px 40px 20px rgba(255, 255, 255, 0.301);
+        font-weight: 10;
+      }
+      th {
+        padding: 10px;
+      }
+
+      #reset{
+        background-color: #b539ee2c;
+        border-radius: 15px;
+        border:1px solid rgb(40, 233, 223);
+        color: rgb(40, 233, 223);
+        text-shadow: 4px 4px 10px rgb(255, 61, 229);
+        font-weight: normal;
+        padding:5px 15px;
+        margin-top: 40px;
+        margin-bottom:0px;
+        font-size: small;
+      }
+      #reset:hover{
+        background-color: #b539ee2c;
+        border-radius: 15px;
+        border:1px solid rgb(183, 255, 251);
+        color: rgb(183, 255, 251);
+        text-shadow: 4px 4px 10px rgb(189, 38, 169);
+      }
+
+
+
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h1 id="header">Bat- Ball- Stump Game</h1>
+      <button
+        onclick="
+            randGen();
+    
+            bat();
+    
+            // -- just for color --
+            colors();
+    
+    
+        "
+      >
+        <img src="./bat.png" height="50px"> Bat
+      </button>
+
+      <button
+        onclick="
+        randGen();
+         ball();
+        
+        
+        // -- just for color --
+            colors();
+    
+    
+    "
+      >
+      <img src="./ball.png" height="50px"> Ball
+      </button>
+      <button
+        onclick="
+        randGen();
+        stump();
+      
+        
+        // -- just for color --
+           colors();
+    
+    
+    "
+      >
+      <img src="./stump.png" height="50px">Stump
+      </button>
+
+      <h2 id="ans"></h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th colspan="3" id="sc">SCORE-BOARD</th>
+        </tr>
+      </thead>
+      <thead>
+        <tr>
+          <th class="subhead">Win</th>
+          <th class="subhead">Tie</th>
+          <th class="subhead">Lost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="win"></td>
+          <td id="tie"></td>
+          <td id="lost"></td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <button id="reset" 
+            onclick="
+            setZero();
+            ">RESET</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+
+      // ----------- J S Starts here ------------
+
+      let scoreStr=localStorage.getItem("SCORE");
+
+      // if(scoreStr==undefined){ //init
+      //   let score = {
+      //   win: 0,
+      //   lost: 0,
+      //   tie: 0,
+      // };
+      // }else{
+      //   let score=JSON.parse(scoreStr);
+      // } --    ** short form :-
+
+      let score = JSON.parse(scoreStr) || {
+        win:0,
+        lost:0,
+        tie:0,
+      }
+      
+showScore();
+
+      let randomNumber, randomChoice;
+      document.querySelector("#ans").innerText = "Click any button";
+      document.getElementById("ans").style.color = "yellow";
+
+
+      function randGen() {
+        randomNumber = Math.floor(Math.random() * 3); // need not to be redeclared these variables
+        if (randomNumber == 0) randomChoice = "bat";
+        if (randomNumber == 1) randomChoice = "ball";
+        if (randomNumber == 2) randomChoice = "stump";
+      }
+
+      function showScore(){
+        document.querySelector("#tie").innerText = score.tie;
+        document.querySelector("#win").innerText = score.win;
+        document.querySelector("#lost").innerText = score.lost;
+      }
+
+      function bat() {
+        if (randomChoice == "bat") {
+          document.querySelector("#ans").innerText = "Tie!";
+          score.tie++;
+          
+        } else if (randomChoice == "ball") {
+          document.querySelector("#ans").innerText = "You Won!";
+          score.win++;
+          
+        } else {
+          document.querySelector("#ans").innerText = "You lost";
+          score.lost++;
+          
+        }
+        localStorage.setItem("SCORE",JSON.stringify(score));showScore();
+      }
+
+      function stump() {
+        if (randomChoice == "ball") {
+          document.querySelector("#ans").innerText = "You Lost";
+          score.lost++;
+          
+        } else if (randomChoice == "bat") {
+          document.querySelector("#ans").innerText = "You Won!";
+          score.win++;
+          
+        } else {
+          document.querySelector("#ans").innerText = "Tie!";
+          score.tie++;
+          
+        }
+        localStorage.setItem("SCORE",JSON.stringify(score));
+showScore();
+      }
+
+      function ball() {
+        if (randomChoice == "ball") {
+          document.querySelector("#ans").innerText = "Tie!";
+          score.tie++;
+          
+        } else if (randomChoice == "bat") {
+          document.querySelector("#ans").innerText = "You Lost!";
+          score.lost++;
+          
+        } else {
+          document.querySelector("#ans").innerText = "You Won!";
+          score.win++;
+
+         
+        }
+        localStorage.setItem("SCORE",JSON.stringify(score));
+showScore();
+      }
+
+      function colors() {
+        if (document.querySelector("#ans").innerText == "Tie!") {
+          document.getElementById("ans").style.color = "blue";
+        } else if (document.querySelector("#ans").innerText == "You Won!") {
+          document.getElementById("ans").style.color = "#53c020";
+        } else {
+          document.getElementById("ans").style.color = "yellow";
+        } }
+      
+      function setZero(){
+            score.win=0;
+            score.lost=0;
+            score.tie=0;      // removed physically
+            
+          
+           localStorage.clear(); 
+        /*   removed memory-cally also
+
+            --   OR CAN ALSO BE DONE AS   --
+        
+
+          let dummy_var={
+            win:0,
+            tie:0,
+            lost:0,
+          }
+          localStorage.setItem("SCORE",JSON.stringify(dummy_var));
+        */
+            
+            
+          
+          showScore();
+          // console.log(score.win);
+          // console.log(score.lost);
+          // console.log(score.tie);
+        }
+    </script>
+  </body>
+</html>
